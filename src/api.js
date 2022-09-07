@@ -52,3 +52,5 @@ class JoblyApi {
 // when searching?
 
 // each time a company info is clicked, AJAX request being made?
+
+export default JoblyApi;
