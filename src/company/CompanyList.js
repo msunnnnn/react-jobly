@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import JoblyApi from "../api";
 import CompanyCard from "./CompanyCard";
+import Search from "../common/Search";
 
 
 function CompanyList() {
@@ -21,6 +22,17 @@ function CompanyList() {
     getCompanies();
   }, []);
 
+  async function searchCompanies(searchTerm) {
+    let data = searchTerm !== ''
+             ? {name: searchTerm}
+             : {};
+    const response = await JoblyApi.request("companies", data);
+
+    setCompanies({
+      isLoading: false,
+      data: response.companies
+    });
+  }
 
   if (companies.isLoading) {
     return (
@@ -30,7 +42,7 @@ function CompanyList() {
 
   return (
     <>
-      <div>Search bar here</div>
+      <Search searchBy={searchCompanies}/>
 
       {companies.data.map(c => (
         <CompanyCard key={c.handle} company={c} />))
