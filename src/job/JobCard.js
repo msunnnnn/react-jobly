@@ -5,7 +5,7 @@ import React from "react";
  * Prop
  * -job {title, companyName, salary, equity}, companyName could be empty
  *
- * { CompanyDetail, JobList } -> JobCard
+ * JobCardList -> JobCard
 */
 function JobCard({ job }) {
   const { title, companyName, salary, equity } = job;

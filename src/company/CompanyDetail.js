@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import JoblyApi from "../api";
-import JobCard from "../job/JobCard";
+import JobCardList from "../job/JobCardList";
+import Loading from "../common/Loading";
 
 /** CompanyDetail component: Displays company's details and company's job listings
  *
@@ -10,59 +11,57 @@ import JobCard from "../job/JobCard";
  * - company
  *
  * Params:
- * - name (company handle)
+ * - handle
  *
  * Effects:
  * - AJAX request to get company details
  *
- * { RoutesList, Option: CompanyList } -> CompanyDetail -> JobCard
+ * { RoutesList, Option: CompanyList } -> CompanyDetail -> JobCardList
  */
 
 function CompanyDetail() {
 
   //gets company handle from params
-  const { name } = useParams();
+  const { handle } = useParams();
 
   const [companyDetails, setCompanyDetails] = useState({
     isLoading: true,
-    companyName: "",
-    companyDescription: "",
-    jobs: []
+    // companyName: "",
+    // companyDescription: "",
+    // jobs: []
+    data: {}
   });
-
+  // data: {}
 
   /** make API call to get company details */
   useEffect(function getCompanyDetailsWhenMounted() {
     async function getCompanyDetails() {
-      const response = await JoblyApi.getCompany(name);
+      const response = await JoblyApi.getCompany(handle);
       setCompanyDetails({
         isLoading: false,
-        companyName: response.name,
-        companyDescription: response.description,
-        jobs: response.jobs
+        // companyName: response.name,
+        // companyDescription: response.description,
+        // jobs: response.jobs
+        data: response
       });
       console.log(response);
     }
     getCompanyDetails();
-  }, [name]);
+  }, [handle]);
   //Line 30:
   //it gives an error if array is empty, googled it and saw to add the params in there
   //https://ui.dev/react-router-url-parameters
 
+  if (companyDetails.isLoading) return <Loading />;
 
-
-  if (companyDetails.isLoading) {
-    <h1>Loading...</h1>;
-  }
+  const { name, description, jobs } = companyDetails.data;
 
   return (
     <>
-      <h1>{companyDetails.companyName}</h1>
-      <p>{companyDetails.companyDescription}</p>
+      <h1>{name}</h1>
+      <p>{description}</p>
 
-      {companyDetails.jobs.map(c => (
-        <JobCard key={c.id} job={c} />))
-      }
+      <JobCardList jobs={jobs} />
     </>
   );
 

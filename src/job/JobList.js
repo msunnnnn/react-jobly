@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import JoblyApi from "../api";
-import JobCard from "./JobCard";
+import JobCardList from "./JobCardList";
 import Search from "../common/Search";
+import Loading from "../common/Loading";
 
-/** JobList component: lists jobs.
+/** JobList component: gets and lists jobs.
  *
  * State:
  * - list of current/filtered jobs
@@ -48,19 +49,12 @@ function JobList() {
     });
   }
 
-  if (jobs.isLoading) {
-    return (
-      <h1>Loading...</h1>
-    );
-  }
+  if (jobs.isLoading) return <Loading />;
 
   return (
     <>
       <Search searchBy={searchJobs} />
-
-      {jobs.data.map(j => (
-        <JobCard key={j.id} job={j} />))
-      }
+      <JobCardList jobs={jobs.data} />
     </>
   );
 

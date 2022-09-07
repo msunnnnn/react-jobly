@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import JoblyApi from "../api";
 import CompanyCard from "./CompanyCard";
 import Search from "../common/Search";
+import Loading from "../common/Loading";
 
 /** CompanyList component: lists companies.
  *
@@ -47,11 +48,7 @@ function CompanyList() {
     });
   }
 
-  if (companies.isLoading) {
-    return (
-      <h1>Loading...</h1>
-    );
-  }
+  if (companies.isLoading) return <Loading />;
 
   return (
     <>

@@ -5,6 +5,10 @@ import './App.css';
 import Navigation from './common/Navigation';
 import RoutesList from './common/RoutesList';
 
+/** App component.
+ *
+ * App -> { Navigation, RoutesList }
+ */
 function App() {
   return (
     <div className="App">

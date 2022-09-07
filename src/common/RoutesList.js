@@ -8,13 +8,15 @@ import JobList from '../job/JobList';
  *
  * Events:
  * - routes to Homepage, CompanyList, CompanyDetail, JobList
+ *
+ * App -> RoutesList -> { Homepage, CompanyList, CompanyDetail, JobList }
  */
 function RoutesList() {
   return (
     <Routes>
       <Route element={<Homepage />} path="/" />
       <Route element={<CompanyList />} path="/companies" />
-      <Route element={<CompanyDetail />} path="/companies/:name" />
+      <Route element={<CompanyDetail />} path="/companies/:handle" />
       <Route element={<JobList />} path="/jobs" />
       <Route element={<Navigate to="/" />} path="*" />
     </Routes>

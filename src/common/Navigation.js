@@ -5,6 +5,8 @@ import { NavLink } from "react-router-dom";
  *
  * Events:
  * - links to Homepage, Companies, Jobs
+ *
+ * App -> Navigation -> { Homepage, CompanyList, JobList }
  */
 function Navigation() {
   return (
