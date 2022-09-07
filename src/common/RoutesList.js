@@ -3,13 +3,14 @@ import Homepage from '../common/Homepage';
 import CompanyList from '../company/CompanyList';
 import CompanyDetail from '../company/CompanyDetail';
 import JobList from '../job/JobList';
+import LoginForm from '../auth/LoginForm';
+import SignupForm from '../auth/SignupForm';
+import ProfileForm from '../auth/ProfileForm';
 
 /** RoutesList component.
  *
- * Events:
- * - routes to Homepage, CompanyList, CompanyDetail, JobList
- *
- * App -> RoutesList -> { Homepage, CompanyList, CompanyDetail, JobList }
+ * App -> RoutesList -> { Homepage, CompanyList, CompanyDetail, JobList,
+ *                        LoginForm, SignupForm, ProfileForm }
  */
 function RoutesList() {
   return (
@@ -18,6 +19,9 @@ function RoutesList() {
       <Route element={<CompanyList />} path="/companies" />
       <Route element={<CompanyDetail />} path="/companies/:handle" />
       <Route element={<JobList />} path="/jobs" />
+      <Route element={<LoginForm />} path="/login" />
+      <Route element={<SignupForm />} path="/signup" />
+      <Route element={<ProfileForm />} path="/profile" />
       <Route element={<Navigate to="/" />} path="*" />
     </Routes>
   );
