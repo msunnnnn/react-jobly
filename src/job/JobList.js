@@ -3,12 +3,26 @@ import JoblyApi from "../api";
 import JobCard from "./JobCard";
 import Search from "../common/Search";
 
-function JobList(){
+/** JobList component: lists jobs.
+ *
+ * State:
+ * - list of current/filtered jobs
+ *
+ * Effects:
+ * - AJAX request to get jobs, either with or without search
+ *
+ * Functions:
+ * - searchJobs: updates state for list of current/filtered jobs
+ *
+ * RoutesList -> JobList -> { JobCard, Search }
+ *
+ */
+function JobList() {
 
   const [jobs, setJobs] = useState({
     isLoading: true,
-    data : []
-  })
+    data: []
+  });
 
   useEffect(function getJobsWhenMounted() {
     async function getJobs() {
@@ -16,7 +30,7 @@ function JobList(){
       setJobs({
         isLoading: false,
         data: response.jobs
-      })
+      });
     }
     getJobs();
   }, []);
@@ -24,8 +38,8 @@ function JobList(){
 
   async function searchJobs(searchTerm) {
     let data = searchTerm !== ''
-             ? {title: searchTerm}
-             : {};
+      ? { title: searchTerm }
+      : {};
     const response = await JoblyApi.request("jobs", data);
 
     setJobs({
@@ -33,8 +47,6 @@ function JobList(){
       data: response.jobs
     });
   }
-
-
 
   if (jobs.isLoading) {
     return (
@@ -44,7 +56,7 @@ function JobList(){
 
   return (
     <>
-      <Search searchBy={searchJobs}/>
+      <Search searchBy={searchJobs} />
 
       {jobs.data.map(j => (
         <JobCard key={j.id} job={j} />))

@@ -3,7 +3,20 @@ import JoblyApi from "../api";
 import CompanyCard from "./CompanyCard";
 import Search from "../common/Search";
 
-
+/** CompanyList component: lists companies.
+ *
+ * State:
+ * - list of current/filtered companies
+ *
+ * Effects:
+ * - AJAX request to get companies, either with or without search
+ *
+ * Functions:
+ * - searchCompanies: updates state for list of current/filtered companies
+ *
+ * RoutesList -> CompanyList -> { CompanyCard, Search }
+ *
+ */
 function CompanyList() {
 
   const [companies, setCompanies] = useState({

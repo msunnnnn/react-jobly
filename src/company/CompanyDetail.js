@@ -4,10 +4,18 @@ import { useParams } from "react-router-dom";
 import JoblyApi from "../api";
 import JobCard from "../job/JobCard";
 
-/**
- * Displays company's details and company's job listings
+/** CompanyDetail component: Displays company's details and company's job listings
  *
- * (Option: CompanyList ->) CompanyDetail-> JobCard
+ * State:
+ * - company
+ *
+ * Params:
+ * - name (company handle)
+ *
+ * Effects:
+ * - AJAX request to get company details
+ *
+ * { RoutesList, Option: CompanyList } -> CompanyDetail -> JobCard
  */
 
 function CompanyDetail() {
@@ -33,7 +41,7 @@ function CompanyDetail() {
         companyDescription: response.description,
         jobs: response.jobs
       });
-      console.log(response)
+      console.log(response);
     }
     getCompanyDetails();
   }, [name]);
@@ -49,8 +57,8 @@ function CompanyDetail() {
 
   return (
     <>
-    <h1>{companyDetails.companyName}</h1>
-    <p>{companyDetails.companyDescription}</p>
+      <h1>{companyDetails.companyName}</h1>
+      <p>{companyDetails.companyDescription}</p>
 
       {companyDetails.jobs.map(c => (
         <JobCard key={c.id} job={c} />))

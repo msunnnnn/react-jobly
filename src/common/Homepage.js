@@ -1,5 +1,6 @@
 import React from "react";
 
+/** Homepage component. */
 function Homepage() {
 
   return (

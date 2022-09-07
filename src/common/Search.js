@@ -1,5 +1,19 @@
 import React, { useState } from 'react';
 
+/** Search bar component.
+ *
+ * Props:
+ * - searchBy: function to set parent component state for search
+ *
+ * State:
+ * - searchTerm
+ *
+ * Events:
+ * - handle searchTerm value change
+ * - handle search bar form submit
+ *
+ * { CompanyList, JobList } -> Search
+ */
 function Search({ searchBy }) {
 
   const [searchTerm, setSearchTerm] = useState('');

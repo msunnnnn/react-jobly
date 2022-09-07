@@ -1,7 +1,12 @@
-import React from "react"
-import {NavLink} from "react-router-dom";
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-function Navigation(){
+/** Navigation component.
+ *
+ * Events:
+ * - links to Homepage, Companies, Jobs
+ */
+function Navigation() {
   return (
     <nav>
       <NavLink to="/">
@@ -15,7 +20,7 @@ function Navigation(){
       </NavLink>
 
     </nav>
-  )
+  );
 }
 
 export default Navigation;
