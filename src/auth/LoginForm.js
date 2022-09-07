@@ -1,7 +1,13 @@
 import { useState } from "react";
 
 function LoginForm({ login }) {
-  const [formData, setFormData] = useState({});
+
+  const initialFormData = {
+    username: '',
+    password: ''
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -17,10 +23,22 @@ function LoginForm({ login }) {
     <form onSubmit={handleSubmit}>
       <h2>Log In</h2>
       <label htmlFor="username">Username</label>
-      <input name="username" value={formData.username} onChange={handleChange} />
+      <input
+        id="username"
+        name="username"
+        value={formData.username}
+        onChange={handleChange}
+        aria-label="username"
+      />
       <label htmlFor="password">Password</label>
-      <input name="password" value={formData.password} onChange={handleChange}
-        type="password" />
+      <input
+        id="password"
+        name="password"
+        value={formData.password}
+        onChange={handleChange}
+        type="password"
+        aria-label="password"
+      />
       <button>Submit</button>
     </form>
   );

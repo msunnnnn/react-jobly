@@ -12,7 +12,7 @@ import ProfileForm from '../auth/ProfileForm';
  * App -> RoutesList -> { Homepage, CompanyList, CompanyDetail, JobList,
  *                        LoginForm, SignupForm, ProfileForm }
  */
-function RoutesList({login}) {
+function RoutesList({login, signup}) {
   return (
     <Routes>
       <Route element={<Homepage />} path="/" />
@@ -20,7 +20,7 @@ function RoutesList({login}) {
       <Route element={<CompanyDetail />} path="/companies/:handle" />
       <Route element={<JobList />} path="/jobs" />
       <Route element={<LoginForm login={login}/>} path="/login" />
-      <Route element={<SignupForm />} path="/signup" />
+      <Route element={<SignupForm signup={signup}/>} path="/signup" />
       <Route element={<ProfileForm />} path="/profile" />
       <Route element={<Navigate to="/" />} path="*" />
     </Routes>

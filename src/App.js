@@ -30,12 +30,21 @@ function App() {
     <Navigate to="/homepage" />
   }
 
+  async function signup(data) {
+    const response = await JoblyApi.request("auth/register", data, "post");
+    const token = response.token;
+    const payload = jwt_decode(token);
+    console.log(payload)
+    setUser(payload);
+    <Navigate to="/homepage" />
+  }
+
   return (
     <div className="App">
       <userContext.Provider value={user}>
         <BrowserRouter>
           <Navigation />
-          <RoutesList login={login}/>
+          <RoutesList login={login} signup={signup}/>
         </BrowserRouter>
       </userContext.Provider>
     </div>
