@@ -24,7 +24,7 @@ function JobList(){
 
   async function searchJobs(searchTerm) {
     let data = searchTerm !== ''
-             ? {name: searchTerm}
+             ? {title: searchTerm}
              : {};
     const response = await JoblyApi.request("jobs", data);
 
