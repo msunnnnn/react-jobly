@@ -16,13 +16,14 @@ function LoginForm({ login }) {
   return (
     <form onSubmit={handleSubmit}>
       <h2>Log In</h2>
-      Username: <input name="username" value={formData.color} onChange={handleChange} />
-      Password: <input name="password" value={formData.currency} onChange={handleChange} />
+      <label htmlFor="username">Username</label>
+      <input name="username" value={formData.username} onChange={handleChange} />
+      <label htmlFor="password">Password</label>
+      <input name="password" value={formData.password} onChange={handleChange}
+        type="password" />
       <button>Submit</button>
     </form>
   );
-
-
 }
 
 export default LoginForm;

@@ -1,11 +1,13 @@
 import logo from './logo.svg';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Navigate } from "react-router-dom";
 import userContext from './userContext';
 import { useState } from 'react';
+import jwt_decode from 'jwt-decode';
 
 import './App.css';
 import Navigation from './common/Navigation';
 import RoutesList from './common/RoutesList';
+import JoblyApi from './api';
 
 /** App component.
  *
@@ -19,8 +21,13 @@ function App() {
     setUser(newUser);
   }
 
-  function login() {
-    
+  async function login(data) {
+    const response = await JoblyApi.request("auth/token", data, "post");
+    const token = response.token;
+    const payload = jwt_decode(token);
+    console.log(payload)
+    setUser(payload);
+    <Navigate to="/homepage" />
   }
 
   return (
@@ -28,7 +35,7 @@ function App() {
       <userContext.Provider value={user}>
         <BrowserRouter>
           <Navigation />
-          <RoutesList />
+          <RoutesList login={login}/>
         </BrowserRouter>
       </userContext.Provider>
     </div>
