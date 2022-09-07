@@ -31,15 +31,15 @@ function CompanyList() {
       setCompanies({
         isLoading: false,
         data: response.companies
-      })
+      });
     }
     getCompanies();
   }, []);
 
   async function searchCompanies(searchTerm) {
     let data = searchTerm !== ''
-             ? {name: searchTerm}
-             : {};
+      ? { name: searchTerm }
+      : {};
     const response = await JoblyApi.request("companies", data);
 
     setCompanies({
@@ -52,11 +52,14 @@ function CompanyList() {
 
   return (
     <>
-      <Search searchBy={searchCompanies}/>
-
-      {companies.data.map(c => (
-        <CompanyCard key={c.handle} company={c} />))
-      }
+      <Search searchBy={searchCompanies} />
+      <div className="CompanyList col-md-8 offset-md-2">
+        <div className="CompanyList">
+          {companies.data.map(c => (
+            <CompanyCard key={c.handle} company={c} />))
+          }
+        </div>
+      </div>
     </>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./Search.css";
 
 /** Search bar component.
  *
@@ -31,17 +32,17 @@ function Search({ searchBy }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="search-bar d-flex">
       <input
         id="search-bar"
         name="search-bar"
-        className="search-bar"
+        className="form-control me-2"
         placeholder="Enter search term..."
         onChange={handleChange}
         value={searchTerm}
         aria-label="search-bar"
       />
-      <button>Submit</button>
+      <button className="btn btn-primary">Submit</button>
 
     </form>
   );

@@ -1,0 +1,36 @@
+.CompanyCard {
+    max-height: 150px;
+    text-align: left;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.CompanyCard img {
+    max-width: 30px;
+}
+
+/* unvisited link */
+a:link {
+    text-decoration: none;
+    color: black;
+}
+
+/* visited link */
+a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+/* mouse over link */
+a:hover {
+    text-decoration: none;
+    color: cadetblue;
+}
+
+/* selected link */
+a:active {
+    text-decoration: none;
+    color: black;
+}
