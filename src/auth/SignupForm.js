@@ -8,10 +8,9 @@ function SignupForm({ signup }) {
     firstName: '',
     lastName: '',
     email: ''
-  }
+  };
 
   const [formData, setFormData] = useState(initialFormData);
-
 
   function handleChange(evt) {
     const { name, value } = evt.target;

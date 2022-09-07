@@ -1,7 +1,14 @@
-import {useState} from "react";
+import { useState, useContext } from "react";
+import userContext from "../userContext";
 
-function ProfileForm(signup) {
-  const [formData, setFormData] = useState({});
+function ProfileForm({ update }) {
+  const user = useContext(userContext);
+  const initialFormData = {
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email
+  }
+  const [formData, setFormData] = useState(initialFormData);
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -10,15 +17,45 @@ function ProfileForm(signup) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    signup(formData);
+    update(formData);
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Log In</h2>
-      Username: <input name="username" value={formData.color} onChange={handleChange} />
-      Password: <input name="password" value={formData.currency} onChange={handleChange} />
-      <button>Submit</button>
+      <h2>Profile</h2>
+      <label htmlFor="username">Username</label>
+      <input
+        id="username"
+        name="username"
+        value={user.username}
+        aria-label="username"
+        disabled={true}
+      />
+      <label htmlFor="firstName">First name</label>
+      <input
+        id="firstName"
+        name="firstName"
+        value={formData.firstName}
+        onChange={handleChange}
+        aria-label="firstName"
+      />
+      <label htmlFor="lastName">Last name</label>
+      <input
+        id="lastName"
+        name="lastName"
+        value={formData.lastName}
+        onChange={handleChange}
+        aria-label="lastName"
+      />
+      <label htmlFor="email">Email</label>
+      <input
+        id="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+        aria-label="email"
+      />
+      <button>Save Changes</button>
     </form>
   );
 }

@@ -17,26 +17,32 @@ function App() {
 
   const [user, setUser] = useState(null);
 
-  function updateUser(newUser) {
-    setUser(newUser);
-  }
 
+
+  async function updateUserState(token) {
+    const payload = jwt_decode(token);
+    JoblyApi.token = token;
+    const response = await JoblyApi.request(`users/${payload.username}`);
+    setUser(response.user);
+  }
   async function login(data) {
     const response = await JoblyApi.request("auth/token", data, "post");
     const token = response.token;
-    const payload = jwt_decode(token);
-    console.log(payload)
-    setUser(payload);
+    updateUserState(token);
     <Navigate to="/homepage" />
   }
 
   async function signup(data) {
     const response = await JoblyApi.request("auth/register", data, "post");
     const token = response.token;
-    const payload = jwt_decode(token);
-    console.log(payload)
-    setUser(payload);
+    updateUserState(token);
     <Navigate to="/homepage" />
+  }
+
+  async function updateProfile(data) {
+    const response =
+      await JoblyApi.request(`users/${user.username}`, data, "patch");
+    setUser(response.user);
   }
 
   return (
@@ -44,7 +50,7 @@ function App() {
       <userContext.Provider value={user}>
         <BrowserRouter>
           <Navigation />
-          <RoutesList login={login} signup={signup}/>
+          <RoutesList login={login} signup={signup} update={updateProfile} />
         </BrowserRouter>
       </userContext.Provider>
     </div>

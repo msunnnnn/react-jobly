@@ -48,9 +48,4 @@ class JoblyApi {
   // obviously, you'll add a lot here ...
 }
 
-// are AJAX calls only being made when clicking on companies/jobs and not
-// when searching?
-
-// each time a company info is clicked, AJAX request being made?
-
 export default JoblyApi;

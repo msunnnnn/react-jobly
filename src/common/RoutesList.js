@@ -6,13 +6,14 @@ import JobList from '../job/JobList';
 import LoginForm from '../auth/LoginForm';
 import SignupForm from '../auth/SignupForm';
 import ProfileForm from '../auth/ProfileForm';
+// import Logout from '../auth/Logout';
 
 /** RoutesList component.
  *
  * App -> RoutesList -> { Homepage, CompanyList, CompanyDetail, JobList,
  *                        LoginForm, SignupForm, ProfileForm }
  */
-function RoutesList({login, signup}) {
+function RoutesList({login, signup, update}) {
   return (
     <Routes>
       <Route element={<Homepage />} path="/" />
@@ -21,7 +22,8 @@ function RoutesList({login, signup}) {
       <Route element={<JobList />} path="/jobs" />
       <Route element={<LoginForm login={login}/>} path="/login" />
       <Route element={<SignupForm signup={signup}/>} path="/signup" />
-      <Route element={<ProfileForm />} path="/profile" />
+      <Route element={<ProfileForm update={update}/>} path="/profile" />
+      {/* <Route element={<Logout />} path="/logout" /> */}
       <Route element={<Navigate to="/" />} path="*" />
     </Routes>
   );
