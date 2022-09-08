@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import { BrowserRouter, Navigate } from "react-router-dom";
 import userContext from './userContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import jwt_decode from 'jwt-decode';
 
 import './App.css';
@@ -22,27 +22,37 @@ import JoblyApi from './api';
 function App() {
 
   const [user, setUser] = useState(null);
+  const [userToken, setUserToken] = useState("");
 
-  /** Decodes token and gets user info from API. Updates user state with info. */
-  async function updateUserState(token) {
-    const payload = jwt_decode(token);
-    JoblyApi.token = token;
-    const response = await JoblyApi.request(`users/${payload.username}`);
-    setUser(response.user);
-  }
+  useEffect(function getUserInfo() {
+    async function getUserFromAPI() {
+      const payload = jwt_decode(userToken);
+      const response = await JoblyApi.request(`users/${payload.username}`);
+      setUser(response.user);
+    }
+    if(userToken !== ""){
+      JoblyApi.token = userToken
+      // localStorage.setItem("token", userToken)
+      getUserFromAPI()
+    }
+    // }else if(localStorage.getItem("token")){
+    //   setUserToken(localStorage.getItem("token"))
+    //   getUserFromAPI()
+    // }
+  },[userToken]);
 
   /** Gets token from API with login data, then updates user state.*/
   async function login(data) {
     const response = await JoblyApi.request("auth/token", data, "post");
     const token = response.token;
-    updateUserState(token);
+    setUserToken(token);
   }
 
   /** Gets token from API with signup data, then updates user state.*/
   async function signup(data) {
     const response = await JoblyApi.request("auth/register", data, "post");
     const token = response.token;
-    updateUserState(token);
+    setUserToken(token);
   }
 
   /** Makes API request to update user info, then updates user state. */
@@ -67,7 +77,7 @@ function App() {
             login={login}
             signup={signup}
             update={updateProfile}
-            logout={logout}/>
+            logout={logout} />
         </BrowserRouter>
       </userContext.Provider>
     </div>

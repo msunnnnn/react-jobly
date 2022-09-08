@@ -12,9 +12,11 @@ import userContext from "../userContext";
  * App -> Navigation -> { Homepage,
  *          (CompanyList, JobList, Profile, Logout) || (LoginForm, SignupForm) }
  */
-function Navigation() {
+function Navigation({logout}) {
 
   const user = useContext(userContext);
+
+  //TODO: make ternary one line -> make into functions & pass in logout func
 
   const navLinks = user
     ? (
@@ -35,7 +37,7 @@ function Navigation() {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="/logout" className="nav-link">
+          <NavLink to="/" className="nav-link" onClick={logout} >
             Log out {user.username}
           </NavLink>
         </li>
