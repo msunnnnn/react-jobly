@@ -1,13 +1,29 @@
 import { useState, useContext } from "react";
 import userContext from "../userContext";
 
+/** ProfileForm component.
+ *
+ * Props:
+ * - update function
+ *
+ * State:
+ * - form data
+ *
+ * Events:
+ * - handle change
+ * - handle submit
+ *
+ * RoutesList -> ProfileForm
+ */
 function ProfileForm({ update }) {
+
   const user = useContext(userContext);
   const initialFormData = {
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email
   }
+
   const [formData, setFormData] = useState(initialFormData);
 
   function handleChange(evt) {

@@ -11,13 +11,17 @@ import JoblyApi from './api';
 
 /** App component.
  *
+ * State:
+ * - user
+ *
+ * Context:
+ * - user
+ * 
  * App -> { Navigation, RoutesList }
  */
 function App() {
 
   const [user, setUser] = useState(null);
-
-
 
   async function updateUserState(token) {
     const payload = jwt_decode(token);
@@ -25,18 +29,19 @@ function App() {
     const response = await JoblyApi.request(`users/${payload.username}`);
     setUser(response.user);
   }
+
   async function login(data) {
     const response = await JoblyApi.request("auth/token", data, "post");
     const token = response.token;
     updateUserState(token);
-    <Navigate to="/homepage" />
+    return <Navigate to="/" />
   }
 
   async function signup(data) {
     const response = await JoblyApi.request("auth/register", data, "post");
     const token = response.token;
     updateUserState(token);
-    <Navigate to="/homepage" />
+    return <Navigate to="/" />
   }
 
   async function updateProfile(data) {
@@ -45,12 +50,21 @@ function App() {
     setUser(response.user);
   }
 
+  function logout() {
+    JoblyApi.token = '';
+    setUser(null);
+  }
+
   return (
     <div className="App">
       <userContext.Provider value={user}>
         <BrowserRouter>
           <Navigation />
-          <RoutesList login={login} signup={signup} update={updateProfile} />
+          <RoutesList
+            login={login}
+            signup={signup}
+            update={updateProfile}
+            logout={logout}/>
         </BrowserRouter>
       </userContext.Provider>
     </div>
