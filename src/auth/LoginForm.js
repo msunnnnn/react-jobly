@@ -1,5 +1,19 @@
 import { useState } from "react";
 
+/** LoginForm component.
+ *
+ * Props:
+ * - login function
+ *
+ * State:
+ * - form data
+ *
+ * Events:
+ * - handle change
+ * - handle submit
+ *
+ * RoutesList -> LoginForm
+ */
 function LoginForm({ login }) {
 
   const initialFormData = {

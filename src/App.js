@@ -16,13 +16,14 @@ import JoblyApi from './api';
  *
  * Context:
  * - user
- * 
+ *
  * App -> { Navigation, RoutesList }
  */
 function App() {
 
   const [user, setUser] = useState(null);
 
+  /** Decodes token and gets user info from API. Updates user state with info. */
   async function updateUserState(token) {
     const payload = jwt_decode(token);
     JoblyApi.token = token;
@@ -30,6 +31,7 @@ function App() {
     setUser(response.user);
   }
 
+  /** Gets token from API with login data, then updates user state.*/
   async function login(data) {
     const response = await JoblyApi.request("auth/token", data, "post");
     const token = response.token;
@@ -37,6 +39,7 @@ function App() {
     return <Navigate to="/" />
   }
 
+  /** Gets token from API with signup data, then updates user state.*/
   async function signup(data) {
     const response = await JoblyApi.request("auth/register", data, "post");
     const token = response.token;
@@ -44,12 +47,14 @@ function App() {
     return <Navigate to="/" />
   }
 
+  /** Makes API request to update user info, then updates user state. */
   async function updateProfile(data) {
     const response =
       await JoblyApi.request(`users/${user.username}`, data, "patch");
     setUser(response.user);
   }
 
+  /** Removes token from JoblyApi and updates user state to null. */
   function logout() {
     JoblyApi.token = '';
     setUser(null);

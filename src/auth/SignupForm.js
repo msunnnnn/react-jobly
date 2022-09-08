@@ -1,5 +1,19 @@
 import { useState } from "react";
 
+/** SignupForm component.
+ *
+ * Props:
+ * - signup function
+ *
+ * State:
+ * - form data
+ *
+ * Events:
+ * - handle change
+ * - handle submit
+ *
+ * RoutesList -> SignupForm
+ */
 function SignupForm({ signup }) {
 
   const initialFormData = {
