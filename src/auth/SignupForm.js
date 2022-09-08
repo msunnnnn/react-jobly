@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import userContext from "../userContext";
+import { Navigate } from "react-router-dom";
 
 /** SignupForm component.
  *
@@ -15,6 +17,8 @@ import { useState } from "react";
  * RoutesList -> SignupForm
  */
 function SignupForm({ signup }) {
+
+  const user = useContext(userContext);
 
   const initialFormData = {
     username: '',
@@ -35,6 +39,8 @@ function SignupForm({ signup }) {
     evt.preventDefault();
     signup(formData);
   }
+
+  if (user) return <Navigate to="/" />
 
   return (
     <form onSubmit={handleSubmit}>

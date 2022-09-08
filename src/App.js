@@ -36,7 +36,6 @@ function App() {
     const response = await JoblyApi.request("auth/token", data, "post");
     const token = response.token;
     updateUserState(token);
-    return <Navigate to="/" />
   }
 
   /** Gets token from API with signup data, then updates user state.*/
@@ -44,7 +43,6 @@ function App() {
     const response = await JoblyApi.request("auth/register", data, "post");
     const token = response.token;
     updateUserState(token);
-    return <Navigate to="/" />
   }
 
   /** Makes API request to update user info, then updates user state. */
