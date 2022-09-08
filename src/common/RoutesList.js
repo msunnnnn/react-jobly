@@ -7,23 +7,38 @@ import LoginForm from '../auth/LoginForm';
 import SignupForm from '../auth/SignupForm';
 import ProfileForm from '../auth/ProfileForm';
 import Logout from '../auth/Logout';
+import { useContext } from "react";
+import userContext from "../userContext";
 
 /** RoutesList component.
  *
  * App -> RoutesList -> { Homepage, CompanyList, CompanyDetail, JobList,
  *                        LoginForm, SignupForm, ProfileForm, Logout }
  */
-function RoutesList({login, signup, update, logout}) {
+function RoutesList({ login, signup, update, logout }) {
+  const user = useContext(userContext);
+
   return (
     <Routes>
       <Route element={<Homepage />} path="/" />
-      <Route element={<CompanyList />} path="/companies" />
-      <Route element={<CompanyDetail />} path="/companies/:handle" />
-      <Route element={<JobList />} path="/jobs" />
-      <Route element={<LoginForm login={login}/>} path="/login" />
-      <Route element={<SignupForm signup={signup}/>} path="/signup" />
-      <Route element={<ProfileForm update={update}/>} path="/profile" />
-      <Route element={<Logout logout={logout} />} path="/logout" />
+
+      {!user && (
+        <>
+          <Route element={<LoginForm login={login} />} path="/login" />
+          <Route element={<SignupForm signup={signup} />} path="/signup" />
+        </>)
+      }
+
+      {user && (
+        <>
+          <Route element={<CompanyList />} path="/companies" />
+          <Route element={<CompanyDetail />} path="/companies/:handle" />
+          <Route element={<JobList />} path="/jobs" />
+          <Route element={<ProfileForm update={update} />} path="/profile" />
+          <Route element={<Logout logout={logout} />} path="/logout" />
+        </>)
+      }
+
       <Route element={<Navigate to="/" />} path="*" />
     </Routes>
   );

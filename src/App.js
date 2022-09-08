@@ -22,37 +22,36 @@ import JoblyApi from './api';
 function App() {
 
   const [user, setUser] = useState(null);
-  const [userToken, setUserToken] = useState("");
+  const [userToken, setUserToken] = useState(localStorage.getItem("token"))
+
 
   useEffect(function getUserInfo() {
-    async function getUserFromAPI() {
-      const payload = jwt_decode(userToken);
+    async function getUserFromAPI(token) {
+      const payload = jwt_decode(token);
       const response = await JoblyApi.request(`users/${payload.username}`);
       setUser(response.user);
     }
-    if(userToken !== ""){
-      JoblyApi.token = userToken
-      // localStorage.setItem("token", userToken)
-      getUserFromAPI()
+    if (userToken) {
+      JoblyApi.token = userToken;
+      getUserFromAPI(userToken);
     }
-    // }else if(localStorage.getItem("token")){
-    //   setUserToken(localStorage.getItem("token"))
-    //   getUserFromAPI()
-    // }
-  },[userToken]);
+  }, [userToken]);
 
   /** Gets token from API with login data, then updates user state.*/
   async function login(data) {
     const response = await JoblyApi.request("auth/token", data, "post");
     const token = response.token;
-    setUserToken(token);
+    localStorage.setItem("token", token);
+    setUserToken(localStorage.getItem("token"));
   }
 
   /** Gets token from API with signup data, then updates user state.*/
   async function signup(data) {
     const response = await JoblyApi.request("auth/register", data, "post");
     const token = response.token;
-    setUserToken(token);
+    localStorage.setItem("token", token);
+    setUserToken(localStorage.getItem("token"));
+
   }
 
   /** Makes API request to update user info, then updates user state. */
@@ -65,6 +64,7 @@ function App() {
   /** Removes token from JoblyApi and updates user state to null. */
   function logout() {
     JoblyApi.token = '';
+    localStorage.removeItem("token");
     setUser(null);
   }
 
@@ -72,12 +72,12 @@ function App() {
     <div className="App">
       <userContext.Provider value={user}>
         <BrowserRouter>
-          <Navigation />
+          <Navigation
+            logout={logout} />
           <RoutesList
             login={login}
             signup={signup}
-            update={updateProfile}
-            logout={logout} />
+            update={updateProfile} />
         </BrowserRouter>
       </userContext.Provider>
     </div>

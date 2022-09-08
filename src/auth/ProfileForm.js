@@ -16,6 +16,7 @@ import userContext from "../userContext";
  * RoutesList -> ProfileForm
  */
 function ProfileForm({ update }) {
+  let alert = false
 
   const user = useContext(userContext);
   const initialFormData = {
@@ -34,6 +35,7 @@ function ProfileForm({ update }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     update(formData);
+
   }
 
   return (
