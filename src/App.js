@@ -9,6 +9,9 @@ import Navigation from './common/Navigation';
 import RoutesList from './common/RoutesList';
 import JoblyApi from './api';
 
+const TOKEN_KEY = "token";
+
+
 /** App component.
  *
  * State:
@@ -22,7 +25,7 @@ import JoblyApi from './api';
 function App() {
 
   const [user, setUser] = useState(null);
-  const [userToken, setUserToken] = useState(localStorage.getItem("token"))
+  const [userToken, setUserToken] = useState(localStorage.getItem(TOKEN_KEY)||null);
 
 
   useEffect(function getUserInfo() {
@@ -41,16 +44,16 @@ function App() {
   async function login(data) {
     const response = await JoblyApi.request("auth/token", data, "post");
     const token = response.token;
-    localStorage.setItem("token", token);
-    setUserToken(localStorage.getItem("token"));
+    localStorage.setItem(TOKEN_KEY, token);
+    setUserToken(token);
   }
 
   /** Gets token from API with signup data, then updates user state.*/
   async function signup(data) {
     const response = await JoblyApi.request("auth/register", data, "post");
     const token = response.token;
-    localStorage.setItem("token", token);
-    setUserToken(localStorage.getItem("token"));
+    localStorage.setItem(TOKEN_KEY, token);
+    setUserToken(token);
 
   }
 
@@ -64,7 +67,8 @@ function App() {
   /** Removes token from JoblyApi and updates user state to null. */
   function logout() {
     JoblyApi.token = '';
-    localStorage.removeItem("token");
+    localStorage.removeItem(TOKEN_KEY);
+    setUserToken(null);
     setUser(null);
   }
 

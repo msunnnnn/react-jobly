@@ -16,14 +16,14 @@ import userContext from "../userContext";
  * RoutesList -> ProfileForm
  */
 function ProfileForm({ update }) {
-  let alert = false
+  const [isUpdated, setIsUpdated] = useState(false);
 
   const user = useContext(userContext);
   const initialFormData = {
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email
-  }
+  };
 
   const [formData, setFormData] = useState(initialFormData);
 
@@ -35,7 +35,7 @@ function ProfileForm({ update }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     update(formData);
-
+    setIsUpdated(true);
   }
 
   return (
@@ -73,6 +73,12 @@ function ProfileForm({ update }) {
         onChange={handleChange}
         aria-label="email"
       />
+      {
+        isUpdated &&
+        (<div className="alert alert-success" role="alert">
+          Your changes have been saved.
+        </div>)
+      }
       <button>Save Changes</button>
     </form>
   );
