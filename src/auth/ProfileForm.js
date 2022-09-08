@@ -16,16 +16,20 @@ import userContext from "../userContext";
  * RoutesList -> ProfileForm
  */
 function ProfileForm({ update }) {
-  const [isUpdated, setIsUpdated] = useState(false);
 
   const user = useContext(userContext);
+
   const initialFormData = {
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email
   };
 
+
   const [formData, setFormData] = useState(initialFormData);
+  const [isUpdated, setIsUpdated] = useState(false);
+
+
 
   function handleChange(evt) {
     const { name, value } = evt.target;
