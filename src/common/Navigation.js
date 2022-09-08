@@ -12,58 +12,62 @@ import userContext from "../userContext";
  * App -> Navigation -> { Homepage,
  *          (CompanyList, JobList, Profile, Logout) || (LoginForm, SignupForm) }
  */
-function Navigation({logout}) {
+function Navigation({ logout }) {
 
   const user = useContext(userContext);
 
-  //TODO: make ternary one line -> make into functions & pass in logout func
-
-  const navLinks = user
-    ? (
+  function navWhenLoggedIn() {
+    return (
       <>
-        <li className="nav-item">
+        <li className="nav-item mx-2">
           <NavLink to="/companies" className="nav-link">
             Companies
           </NavLink>
         </li>
-        <li className="nav-item">
+        <li className="nav-item mx-2">
           <NavLink to="/jobs" className="nav-link">
             Jobs
           </NavLink>
         </li>
-        <li className="nav-item">
+        <li className="nav-item mx-2">
           <NavLink to="/profile" className="nav-link">
             Profile
           </NavLink>
         </li>
-        <li className="nav-item">
+        <li className="nav-item mx-2">
           <NavLink to="/" className="nav-link" onClick={logout} >
             Log out {user.username}
           </NavLink>
         </li>
       </>
-    )
-    : (
+    );
+  }
+
+  function navWhenLoggedOut() {
+    return (
       <>
-        <li className="nav-item">
+        <li className="nav-item mx-2">
           <NavLink to="/login" className="nav-link">
             Log In
-          </NavLink>
-        </li>
-        <li className="nav-item">
+          </NavLink >
+        </li >
+        <li className="nav-item mx-2">
           <NavLink to="/signup" className="nav-link">
             Sign Up
           </NavLink>
         </li>
       </>
     );
+  }
+
+  const navLinks = user ? navWhenLoggedIn() : navWhenLoggedOut();
 
   return (
-    <nav className="navbar bg-light">
-      <NavLink to="/" className="navbar-brand">
+    <nav className="navbar navbar-light bg-light mb-5">
+      <NavLink to="/" className="navbar-brand mx-2">
         Jobly
       </NavLink>
-      <ul className="navbar-nav">{navLinks}</ul>
+      <ul className="navbar-nav flex-row">{navLinks}</ul>
     </nav>
   );
 

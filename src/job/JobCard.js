@@ -1,4 +1,5 @@
 import React from "react";
+import "./JobCard.css";
 
 /** Displays job listings
  *
@@ -11,12 +12,12 @@ function JobCard({ job }) {
   const { title, companyName, salary, equity } = job;
 
   return (
-    <>
-      <h4>{title}</h4>
-      <h5>{companyName}</h5>
-      <p>Salary: {salary}</p>
-      <p>Equity: {equity}</p>
-    </>
+    <div className="JobCard card container-fluid">
+      <h6 className="card-title">{title}</h6>
+      <p>{companyName}</p>
+      <small className="card-text">Salary: {salary}</small>
+      <small className="card-text">Equity: {equity}</small>
+    </div>
   );
 }
 

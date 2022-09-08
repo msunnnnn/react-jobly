@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import userContext from "../userContext";
 import { Navigate } from "react-router-dom";
+import "./UserForm.css";
 
 /** SignupForm component.
  *
@@ -40,54 +41,61 @@ function SignupForm({ signup }) {
     signup(formData);
   }
 
-  if (user) return <Navigate to="/" />
+  if (user) return <Navigate to="/" />;
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
       <h2>Sign Up</h2>
-      <label htmlFor="username">Username</label>
-      <input
-        id="username"
-        name="username"
-        value={formData.username}
-        onChange={handleChange}
-        aria-label="username"
-      />
-      <label htmlFor="password">Password</label>
-      <input
-        id="password"
-        name="password"
-        value={formData.password}
-        onChange={handleChange}
-        type="password"
-        aria-label="password"
-      />
-      <label htmlFor="firstName">First name</label>
-      <input
-        id="firstName"
-        name="firstName"
-        value={formData.firstName}
-        onChange={handleChange}
-        aria-label="firstName"
-      />
-      <label htmlFor="lastName">Last name</label>
-      <input
-        id="lastName"
-        name="lastName"
-        value={formData.lastName}
-        onChange={handleChange}
-        aria-label="lastName"
-      />
-      <label htmlFor="email">Email</label>
-      <input
-        id="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        aria-label="email"
-      />
-      <button>Submit</button>
-    </form>
+      <form onSubmit={handleSubmit} className="user-form d-flex flex-column">
+        <label htmlFor="username">Username</label>
+        <input
+          id="username"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+          aria-label="username"
+          className="input-bar form-control me-2"
+        />
+        <label htmlFor="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          type="password"
+          aria-label="password"
+          className="input-bar form-control me-2"
+        />
+        <label htmlFor="firstName">First name</label>
+        <input
+          id="firstName"
+          name="firstName"
+          value={formData.firstName}
+          onChange={handleChange}
+          aria-label="firstName"
+          className="input-bar form-control me-2"
+        />
+        <label htmlFor="lastName">Last name</label>
+        <input
+          id="lastName"
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleChange}
+          aria-label="lastName"
+          className="input-bar form-control me-2"
+        />
+        <label htmlFor="email">Email</label>
+        <input
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          aria-label="email"
+          className="input-bar form-control me-2"
+        />
+        <button className="btn btn-primary">Submit</button>
+      </form>
+    </>
   );
 }
 

@@ -1,0 +1,13 @@
+.user-form {
+    margin: 1rem;
+    border: 0;
+    width: 20rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: left;
+}
+
+.input-bar {
+    margin-bottom: 1rem;
+}

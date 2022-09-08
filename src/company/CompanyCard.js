@@ -14,22 +14,15 @@ import "./CompanyCard.css";
  */
 function CompanyCard({ company }) {
   const { name, description, logoUrl, handle } = company;
+  console.log(company)
 
   return (
-    // <div className="container-fluid">
-    //   <div className="row justify-content-md-center">
-    //     <div className="col-12">
-          <Link to={`/companies/${handle}`} className="CompanyCard card container-fluid">
-              <h6 className="card-title">{name}
-              {logoUrl && <img src={logoUrl} alt={name} className="float-end ms-5" />}
-              </h6>
-              <p className="card-text">{description}</p>
-          </Link>
-    //     </div>
-    //   </div>
-    // </div>
-
-
+    <Link to={`/companies/${handle}`} className="CompanyCard card container-fluid">
+      <h6 className="card-title">{name}
+        {logoUrl && <img src={logoUrl} alt={name} className="float-end ms-5" />}
+      </h6>
+      <p className="card-text">{description}</p>
+    </Link>
   );
 
 }
