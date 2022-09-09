@@ -14,7 +14,6 @@ import "./CompanyCard.css";
  */
 function CompanyCard({ company }) {
   const { name, description, logoUrl, handle } = company;
-  console.log(company)
 
   return (
     <Link to={`/companies/${handle}`} className="CompanyCard card container-fluid">

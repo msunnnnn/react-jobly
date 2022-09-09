@@ -8,6 +8,7 @@ import './App.css';
 import Navigation from './common/Navigation';
 import RoutesList from './common/RoutesList';
 import JoblyApi from './api';
+import Loading from './common/Loading';
 
 const TOKEN_KEY = "token";
 
@@ -25,7 +26,10 @@ const TOKEN_KEY = "token";
 function App() {
 
   const [user, setUser] = useState(null);
-  const [userToken, setUserToken] = useState(localStorage.getItem(TOKEN_KEY)||null);
+  const [userToken, setUserToken] =
+    useState(localStorage.getItem(TOKEN_KEY) || null);
+  const [isLoading, setIsLoading] = useState(true)
+
 
 
   useEffect(function getUserInfo() {
@@ -38,6 +42,7 @@ function App() {
       JoblyApi.token = userToken;
       getUserFromAPI(userToken);
     }
+    setIsLoading(false)
   }, [userToken]);
 
   /** Gets token from API with login data, then updates user state.*/
@@ -71,6 +76,15 @@ function App() {
     setUserToken(null);
     setUser(null);
   }
+
+  if (isLoading) {
+    return (
+      <div className='App'>
+        <Loading />
+      </div>
+    );
+  };
+
 
   return (
     <div className="App">

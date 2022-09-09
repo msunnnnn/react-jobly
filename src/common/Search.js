@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
+import { debounce } from "lodash";
 import "./Search.css";
 
 /** Search bar component.
@@ -19,10 +20,17 @@ function Search({ searchBy }) {
 
   const [searchTerm, setSearchTerm] = useState('');
 
+  const debouncedSearch = useMemo(() =>
+    debounce (
+      async (value) => {
+        await searchBy(value);
+      }, 500),[searchBy]);
+
   /** Update form input. */
-  function handleChange(evt) {
+  async function handleChange(evt) {
     const input = evt.target;
     setSearchTerm(input.value);
+    debouncedSearch(input.value);
   }
 
   /** Call parent function and clear form. */

@@ -4,26 +4,26 @@
 
 
 /* unvisited link */
-a:link {
+.navbar-nav a:link {
     text-decoration: none;
-    color: black;
+    color: purple !important;
 }
 
 /* visited link */
-a:visited {
+.navbar-nav a:visited {
     text-decoration: none;
-    color: black;
+    color: rgb(72, 77, 79) !important;
 }
 
 /* mouse over link */
-a:hover {
+.navbar-nav a:hover {
     text-decoration: none;
-    color: cadetblue;
+    color: rgb(19, 80, 126)!important;
 }
 
 /* selected link */
-a:active {
+.navbar-nav .active {
     text-decoration: none;
-    color: black;
-    font-weight: bold;
+    color: rgb(72, 77, 79) !important;
+    font-weight: bold !important;
 }

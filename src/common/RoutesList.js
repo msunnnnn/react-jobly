@@ -1,5 +1,5 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import userContext from "../userContext";
 
 import Homepage from '../common/Homepage';
@@ -17,17 +17,27 @@ import ProfileForm from '../auth/ProfileForm';
  */
 function RoutesList({ login, signup, update, logout }) {
   const user = useContext(userContext);
+  const [isLoading, setIsLoading] =useState(true)
+
+  console.log("route's list rendered")
+
+  function toggleLoading(){
+    if (isLoading === true){
+      return (
+        <>
+          <Route element={<LoginForm login={login} />} path="/login" />
+          <Route element={<SignupForm signup={signup} />} path="/signup" />
+        </>
+        )
+    }
+    setIsLoading(false)
+  }
 
   return (
     <Routes>
       <Route element={<Homepage />} path="/" />
-
-      {!user && (
-        <>
-          <Route element={<LoginForm login={login} />} path="/login" />
-          <Route element={<SignupForm signup={signup} />} path="/signup" />
-        </>)
-      }
+      
+      {!user && toggleLoading()}
 
       {user && (
         <>
