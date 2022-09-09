@@ -34,7 +34,7 @@ function Navigation({ logout }) {
             Profile
           </NavLink>
         </li>
-        <li className="nav-item mx-2">
+        <li className="mx-2">
           <NavLink to="/" className="nav-link" onClick={logout} >
             Log out {user.username}
           </NavLink>

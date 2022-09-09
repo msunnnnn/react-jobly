@@ -20,14 +20,14 @@ function Homepage() {
             <span>
               <NavLink
               to="/login"
-              className="text-white btn btn-primary mx-2">
+              className="text-white btn btn-info text-white mx-2">
               Log In
             </NavLink>
             </span>
             <span>
             <NavLink
               to="/signup"
-              className="text-white btn btn-primary mx-2">
+              className="text-white btn btn-info text-white mx-2">
               Sign Up
             </NavLink>
             </span>

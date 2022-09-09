@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url('/public/pawel-czerwinski-kOfVxiO1LOk-unsplash.jpg');
+  background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url('/public/clark-van-der-beken-MQzSZ5BkjAg-unsplash.jpg');
   background-position: 50%;
   background-repeat: no-repeat;
   background-attachment: fixed;

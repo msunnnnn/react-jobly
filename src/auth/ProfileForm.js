@@ -89,7 +89,7 @@ function ProfileForm({ update }) {
             Your changes have been saved.
           </div>)
         }
-        <button className="btn btn-primary">Save Changes</button>
+        <button className="btn btn-info text-white">Save Changes</button>
       </form>
     </>
   );

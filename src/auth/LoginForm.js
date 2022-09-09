@@ -63,7 +63,7 @@ function LoginForm({ login }) {
           aria-label="password"
           className="input-bar form-control me-2"
         />
-        <button className="btn btn-primary">Submit</button>
+        <button className="btn btn-info text-white">Submit</button>
       </form>
     </>
   );

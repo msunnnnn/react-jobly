@@ -17,6 +17,8 @@ const TOKEN_KEY = "token";
  *
  * State:
  * - user
+ * - user token
+ * - isLoading
  *
  * Context:
  * - user
@@ -28,21 +30,21 @@ function App() {
   const [user, setUser] = useState(null);
   const [userToken, setUserToken] =
     useState(localStorage.getItem(TOKEN_KEY) || null);
-  const [isLoading, setIsLoading] = useState(true)
-
-
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(function getUserInfo() {
-    async function getUserFromAPI(token) {
-      const payload = jwt_decode(token);
-      const response = await JoblyApi.request(`users/${payload.username}`);
-      setUser(response.user);
+    async function getUserFromAPI() {
+      if (userToken) {
+        JoblyApi.token = userToken;
+        const payload = jwt_decode(userToken);
+        const response = await JoblyApi.request(`users/${payload.username}`);
+        setUser(response.user);
+      }
+      setIsLoading(false);
     }
-    if (userToken) {
-      JoblyApi.token = userToken;
-      getUserFromAPI(userToken);
-    }
-    setIsLoading(false)
+
+    getUserFromAPI();
+
   }, [userToken]);
 
   /** Gets token from API with login data, then updates user state.*/
@@ -84,7 +86,6 @@ function App() {
       </div>
     );
   };
-
 
   return (
     <div className="App">

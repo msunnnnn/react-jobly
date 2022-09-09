@@ -1,6 +1,10 @@
 import React from "react";
 import "./JobCard.css";
 
+import JoblyApi from "../api";
+import { useContext } from "react";
+import userContext from "../userContext";
+
 /** Displays job listings
  *
  * Prop
@@ -9,7 +13,12 @@ import "./JobCard.css";
  * JobCardList -> JobCard
 */
 function JobCard({ job }) {
-  const { title, companyName, salary, equity } = job;
+  const user = useContext(userContext);
+  const { id, title, companyName, salary, equity } = job;
+
+  async function apply() {
+    await JoblyApi.request(`users/${user.username}/jobs/${id}`, {}, "post");
+  }
 
   return (
     <div className="JobCard card container-fluid">
@@ -17,6 +26,7 @@ function JobCard({ job }) {
       <p>{companyName}</p>
       <small className="card-text">Salary: {salary}</small>
       <small className="card-text">Equity: {equity}</small>
+      <button onClick={apply} className="btn btn-info apply text-white">Apply</button>
     </div>
   );
 }

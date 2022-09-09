@@ -11,3 +11,9 @@
 p {
     margin-bottom: 0;
 }
+
+.apply {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}

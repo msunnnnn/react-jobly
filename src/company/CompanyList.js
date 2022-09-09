@@ -53,7 +53,7 @@ function CompanyList() {
   return (
     <>
       <Search searchBy={searchCompanies} />
-      <div className="CompanyList col-md-8 offset-md-2">
+      <div className="CompanyList col-md-6 offset-md-3">
         <div className="CompanyList">
           {companies.data.map(c => (
             <CompanyCard key={c.handle} company={c} />))

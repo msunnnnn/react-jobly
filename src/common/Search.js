@@ -50,7 +50,7 @@ function Search({ searchBy }) {
         value={searchTerm}
         aria-label="search-bar"
       />
-      <button className="btn btn-primary">Submit</button>
+      <button className="btn btn-info text-white">Submit</button>
 
     </form>
   );

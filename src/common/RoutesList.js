@@ -9,6 +9,7 @@ import JobList from '../job/JobList';
 import LoginForm from '../auth/LoginForm';
 import SignupForm from '../auth/SignupForm';
 import ProfileForm from '../auth/ProfileForm';
+import Loading from './Loading';
 
 /** RoutesList component.
  *
@@ -17,37 +18,33 @@ import ProfileForm from '../auth/ProfileForm';
  */
 function RoutesList({ login, signup, update, logout }) {
   const user = useContext(userContext);
-  const [isLoading, setIsLoading] =useState(true)
 
-  console.log("route's list rendered")
-
-  function toggleLoading(){
-    if (isLoading === true){
-      return (
-        <>
-          <Route element={<LoginForm login={login} />} path="/login" />
-          <Route element={<SignupForm signup={signup} />} path="/signup" />
-        </>
-        )
-    }
-    setIsLoading(false)
+  function navLinksWhenLoggedOut() {
+    return (
+      <>
+        <Route element={<LoginForm login={login} />} path="/login" />
+        <Route element={<SignupForm signup={signup} />} path="/signup" />
+      </>
+    );
   }
 
-  return (
-    <Routes>
-      <Route element={<Homepage />} path="/" />
-      
-      {!user && toggleLoading()}
-
-      {user && (
-        <>
+  function navLinksWhenLoggedIn() {
+    return (
+      <>
           <Route element={<CompanyList />} path="/companies" />
           <Route element={<CompanyDetail />} path="/companies/:handle" />
           <Route element={<JobList />} path="/jobs" />
           <Route element={<ProfileForm update={update} />} path="/profile" />
-        </>)
-      }
+      </>
+    );
+  }
 
+  const navLinks = user ? navLinksWhenLoggedIn() : navLinksWhenLoggedOut();
+
+  return (
+    <Routes>
+      <Route element={<Homepage />} path="/" />
+      {navLinks}
       <Route element={<Navigate to="/" />} path="*" />
     </Routes>
   );

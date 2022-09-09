@@ -4,25 +4,25 @@
 
 
 /* unvisited link */
-.navbar-nav a:link {
+.nav-item .navbar-brand a:link {
     text-decoration: none;
     color: purple !important;
 }
 
 /* visited link */
-.navbar-nav a:visited {
+.nav-item .navbar-brand a:visited {
     text-decoration: none;
     color: rgb(72, 77, 79) !important;
 }
 
 /* mouse over link */
-.navbar-nav a:hover {
+.nav-item .navbar-brand a:hover {
     text-decoration: none;
     color: rgb(19, 80, 126)!important;
 }
 
 /* selected link */
-.navbar-nav .active {
+.nav-item .active, .navbar-brand .active {
     text-decoration: none;
     color: rgb(72, 77, 79) !important;
     font-weight: bold !important;
