@@ -63,7 +63,7 @@ function Navigation({ logout }) {
   const navLinks = user ? navWhenLoggedIn() : navWhenLoggedOut();
 
   return (
-    <nav className="navbar navbar-light bg-light mb-5">
+    <nav className="navbar navbar-light mb-5 nav">
       <NavLink to="/" className="navbar-brand mx-2">
         Jobly
       </NavLink>
